@@ -1,6 +1,8 @@
 package com.example.splashscreen;
 
 import android.app.ActionBar;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -40,12 +43,43 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 setContentView(R.layout.second);
+                Button btn1 = findViewById(R.id.button_exit);
+                btn1.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                        builder.setTitle("Exit");
+                        builder.setMessage("Do you want to exit ??");
+                        builder.setPositiveButton("Yes. Exit now!", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                finish();
+                                System.exit(0);
+                            };
+
+                        });
+	                    builder.setNegativeButton("Not now", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                                dialogInterface.dismiss();
+                            }
+                        });
+
+
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
+
+                    }
+                });
                 //showSystemUI();
             }
         }, SPLASH_DURATION);   //5 seconds
 
 
     }
+
     private void hideSystemUI() {
         // Enables regular immersive mode.
         // For "lean back" mode, remove SYSTEM_UI_FLAG_IMMERSIVE.
