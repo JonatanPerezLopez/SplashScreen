@@ -40,8 +40,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 setContentView(R.layout.second);
+                //showSystemUI();
             }
         }, SPLASH_DURATION);   //5 seconds
+
 
     }
     private void hideSystemUI() {
